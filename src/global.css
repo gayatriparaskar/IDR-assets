@@ -1,0 +1,136 @@
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Tailwind CSS theme for Aadharshila Realtors
+   * Professional real estate company color scheme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 217 70% 19%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 217 70% 19%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 70% 19%;
+
+    --primary: 217 70% 19%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 31 100% 63%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 47 100% 93%;
+    --muted-foreground: 217 70% 30%;
+
+    --accent: 47 100% 93%;
+    --accent-foreground: 217 70% 19%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 47 100% 90%;
+    --input: 47 100% 93%;
+    --ring: 217 70% 19%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 217 70% 19%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 31 100% 63%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 47 100% 93%;
+    --sidebar-accent-foreground: 217 70% 19%;
+    --sidebar-border: 31 100% 60%;
+    --sidebar-ring: 31 100% 63%;
+  }
+
+  .dark {
+    --background: 217 70% 12%;
+    --foreground: 0 0% 95%;
+
+    --card: 217 70% 18%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 217 70% 18%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 217 70% 19%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 31 100% 63%;
+    --secondary-foreground: 217 70% 19%;
+
+    --muted: 217 70% 35%;
+    --muted-foreground: 47 100% 90%;
+
+    --accent: 47 100% 93%;
+    --accent-foreground: 217 70% 19%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 217 70% 28%;
+    --input: 217 70% 28%;
+    --ring: 31 100% 63%;
+    --sidebar-background: 217 70% 19%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 31 100% 63%;
+    --sidebar-primary-foreground: 217 70% 19%;
+    --sidebar-accent: 47 100% 90%;
+    --sidebar-accent-foreground: 217 70% 19%;
+    --sidebar-border: 217 70% 30%;
+    --sidebar-ring: 31 100% 63%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-poppins;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-montserrat font-bold;
+  }
+
+  :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  pre,
+  code {
+    overflow-x: auto;
+    white-space: pre;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-secondary text-secondary-foreground font-semibold rounded-lg border-2 border-secondary hover:opacity-90 transition-colors duration-200;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 sm:py-24 lg:py-32;
+  }
+}

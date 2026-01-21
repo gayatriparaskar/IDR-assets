@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 10%;
+
+    --primary: 258 90% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 4% 96%;
+    --secondary-foreground: 240 10% 10%;
+
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%;
+
+    --accent: 258 90% 96%;
+    --accent-foreground: 258 90% 50%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 258 90% 60%;
+
+    --radius: 0.75rem;
+
+    /* Custom colors for IDR theme */
+    --purple-gradient-start: 258 90% 60%;
+    --purple-gradient-end: 280 85% 50%;
+    --blue-accent: 220 90% 56%;
+    --success: 145 63% 42%;
+    --success-foreground: 0 0% 100%;
+    --highlight-bg: 258 90% 97%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 258 90% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 258 90% 96%;
+    --sidebar-accent-foreground: 258 90% 50%;
+    --sidebar-border: 240 6% 90%;
+    --sidebar-ring: 258 90% 60%;
+  }
+
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 6%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 258 90% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 5% 16%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 5% 16%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 258 50% 20%;
+    --accent-foreground: 258 90% 75%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 5% 18%;
+    --input: 240 5% 18%;
+    --ring: 258 90% 65%;
+    
+    --highlight-bg: 258 50% 12%;
+    --sidebar-background: 240 10% 6%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 258 90% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 258 50% 20%;
+    --sidebar-accent-foreground: 258 90% 75%;
+    --sidebar-border: 240 5% 18%;
+    --sidebar-ring: 258 90% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(258, 90%, 60%) 0%, hsl(280, 85%, 50%) 100%);
+  }
+  
+  .gradient-primary-hover {
+    background: linear-gradient(135deg, hsl(258, 90%, 55%) 0%, hsl(280, 85%, 45%) 100%);
+  }
+  
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(258, 90%, 60%) 0%, hsl(280, 85%, 50%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .glass-card {
+    background: hsl(0 0% 100% / 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(240 6% 90% / 0.5);
+  }
+  
+  .shadow-glow {
+    box-shadow: 0 0 40px hsl(258 90% 60% / 0.15);
+  }
+  
+  .shadow-card {
+    box-shadow: 0 4px 20px hsl(240 10% 10% / 0.08);
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

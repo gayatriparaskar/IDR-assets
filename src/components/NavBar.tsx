@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-
+import logo from "../assets/logo.jpeg";
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
@@ -23,15 +23,17 @@ export default function NavBar() {
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">AA</span>
+              <div className="w-40 h-10  to-secondary rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">
+                  <img src={logo} alt="logo" />
+                </span>
               </div>
-              <div className="hidden sm:block">
+              {/* <div className="hidden sm:block">
                 <p className="text-sm font-bold text-primary">Aadhar</p>
                 <p className="text-xs text-muted-foreground">
                   Asset Management
                 </p>
-              </div>
+              </div> */}
             </div>
           </Link>
 

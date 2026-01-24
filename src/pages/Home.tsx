@@ -21,6 +21,7 @@ import investment4 from "../assets/investment4.jpg";
 import investment5 from "../assets/investment5.jpg";
 import ImageSlider from "../components/ImageSlider";
 import PartnerSlider from "../components/PartnerSlider";
+import AssetManagement from "./AssetManagement";
 
 export default function Home() {
   const heroImages = [
@@ -118,15 +119,17 @@ export default function Home() {
         "We provide quality residential properties at competitive prices, making homeownership accessible to everyone.",
       icon: "🏠",
       image:
-        "https://images.pexels.com/photos/3556058/pexels-photo-3556058.jpeg",
-    },
+        // "https://images.pexels.com/photos/3556058/pexels-photo-3556058.jpeg",
+        investment1
+      },
     {
       title: "Lucrative Investments",
       description:
         "Explore high-return investment opportunities in our carefully curated real estate projects.",
       icon: "📈",
       image:
-        "https://images.pexels.com/photos/3502632/pexels-photo-3502632.jpeg",
+        // "https://images.pexels.com/photos/3502632/pexels-photo-3502632.jpeg",
+        investment2
     },
     {
       title: "Trusted Partnership",
@@ -134,7 +137,8 @@ export default function Home() {
         "With over a decade of excellence, we are your reliable partner in real estate ventures.",
       icon: "🤝",
       image:
-        "https://images.pexels.com/photos/3408314/pexels-photo-3408314.jpeg",
+        // "https://images.pexels.com/photos/3408314/pexels-photo-3408314.jpeg",
+        investment3
     },
   ];
 
@@ -267,11 +271,7 @@ export default function Home() {
                   <span className="font-semibold">
                     Aadhar Asset Management Co.
                   </span>{" "}
-                  is a premier real estate investment platform designed for
-                  Indian retail investors, HNIs, and entrepreneurs. We
-                  democratize high-value real estate investments through
-                  transparent co-ownership and co-investment models, enabling
-                  wealth creation through strategic property asset management.
+            is a real estate–focused asset and property management platform that leverages technology, professional asset oversight, and structured reporting to deliver long-term, stable, and stress-free returns to property owners, trusts, LLPs (SPVs), and investor groups.
                 </p>
                 <p className="text-lg text-gray-50 leading-relaxed">
                   Our vision is to bridge the gap between premium real estate
@@ -333,6 +333,8 @@ export default function Home() {
                   success. We combine market expertise, innovative solutions,
                   and personalized service to help you achieve your financial
                   goals.
+                  While traditional property management is typically limited to “rent collection and maintenance,”
+Aadhar goes further by focusing on data-backed asset monitoring, full lifecycle planning, and exit-ready asset management.
                 </p>
                 <motion.div
                   whileHover={{ scale: 1.05 }}
@@ -466,10 +468,10 @@ export default function Home() {
       </section>
 
       {/* Investment Model Section */}
-      <section className="section-padding bg-gradient-to-b from-accent to-white">
+      <section className=" bg-gradient-to-b from-accent to-white">
         <div className="section-container">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-16 bg-red"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
@@ -1035,6 +1037,7 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </section>
+      <AssetManagement/>
     </div>
   );
 }

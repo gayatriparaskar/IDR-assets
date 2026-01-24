@@ -280,11 +280,9 @@ export default function Contact() {
       </div>
 
       {/* Map Section */}
-      <section className="bg-gray-100 py-12">
-        <div className="section-container">
-          <h2 className="text-2xl font-bold text-primary mb-8 text-center">
-            Find Us on the Map
-          </h2>
+      <section className="">
+        <div className="">
+        
           <div className="rounded-xl overflow-hidden shadow-md h-[450px] w-full">
             <iframe 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7434.104888555701!2d76.2221451865322!3d21.308943967042286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd8330cd642426f%3A0x6d8c36a176a09f78!2sAadharshila%20Realtors%20Management%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1768562341921!5m2!1sen!2sin" 

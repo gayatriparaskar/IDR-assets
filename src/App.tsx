@@ -19,6 +19,7 @@ import BlogPost from "./pages/BlogPost";
 import Blog from "./pages/Blogs";
 import ProjectDetail from "./pages/ProjectDetail";
 import ServiceDetail from "./pages/ServiceDetail";
+import AssetManagement from "./pages/AssetManagement";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +60,14 @@ const App = () => (
             element={
               <AppLayout>
                 <Projects />
+              </AppLayout>
+            }
+          />
+          <Route
+            path="/asset-management"
+            element={
+              <AppLayout>
+                <AssetManagement />
               </AppLayout>
             }
           />

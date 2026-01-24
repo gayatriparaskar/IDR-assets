@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin } from "lucide-react";
-
+import logo from "../assets/logo.jpeg";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -11,8 +11,8 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                <span className="text-primary font-bold text-lg"><Link to="/">AA</Link></span>
+              <div className="w-20 h-20  rounded-lg flex items-center justify-center">
+                <span className="text-primary font-bold text-lg"><Link to="/"><img src={logo}></img></Link></span>
               </div>
               <div>
                 <p className="text-sm font-bold">Aadharshila</p>

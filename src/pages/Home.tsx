@@ -34,7 +34,7 @@ export default function Home() {
     heroSection6,
     heroSection7,
     heroSection8,
-// "https://img.freepik.com/free-photo/horizontal-shot-buildings-construction-site-cloudy-sky-sunset_181624-30552.jpg?t=st=1768553019~exp=1768556619~hmac=0981109976d452cd74f2319f38c4a4ea30dad3c31cc813d05b935426c093401c"
+    // "https://img.freepik.com/free-photo/horizontal-shot-buildings-construction-site-cloudy-sky-sunset_181624-30552.jpg?t=st=1768553019~exp=1768556619~hmac=0981109976d452cd74f2319f38c4a4ea30dad3c31cc813d05b935426c093401c"
     // "https://images.pexels.com/photos/3408314/pexels-photo-3408314.jpeg",
     // "https://images.pexels.com/photos/3808519/pexels-photo-3808519.jpeg",
     // "https://images.pexels.com/photos/3348519/pexels-photo-3348519.jpeg",
@@ -114,14 +114,14 @@ export default function Home() {
 
   const features = [
     {
-      title: "Affordable Housing Solutions",
+      title: "Secure and Transparent Investment Opportunities",
       description:
-        "We provide quality residential properties at competitive prices, making homeownership accessible to everyone.",
+        "Built on trust, clarity, and long-term investor confidence.",
       icon: "🏠",
       image:
         // "https://images.pexels.com/photos/3556058/pexels-photo-3556058.jpeg",
-        investment1
-      },
+        investment1,
+    },
     {
       title: "Lucrative Investments",
       description:
@@ -129,7 +129,7 @@ export default function Home() {
       icon: "📈",
       image:
         // "https://images.pexels.com/photos/3502632/pexels-photo-3502632.jpeg",
-        investment2
+        investment2,
     },
     {
       title: "Trusted Partnership",
@@ -138,7 +138,7 @@ export default function Home() {
       icon: "🤝",
       image:
         // "https://images.pexels.com/photos/3408314/pexels-photo-3408314.jpeg",
-        investment3
+        investment3,
     },
   ];
 
@@ -185,19 +185,24 @@ export default function Home() {
               className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight"
               variants={itemVariants}
             >
-              Wealth Creation Through
-              <br />
-              Strategic Asset Management
+              Aadhar Asset Management
             </motion.h1>
             <motion.p
-              className="text-xl sm:text-2xl text-gray-100 mb-12 leading-relaxed max-w-3xl mx-auto"
+              className="text-2xl sm:text-3xl text-gray-100 mb-6 leading-relaxed max-w-3xl mx-auto font-medium"
               variants={itemVariants}
             >
-              Co-invest and co-own premium real estate with transparency,
-              expertise, and long-term wealth creation at the core.
+              Secure, Transparent, and Profitable Real Estate Investment for
+              Every Indian
+            </motion.p>
+            <motion.p
+              className="text-lg sm:text-xl text-gray-200 mb-8 leading-relaxed max-w-4xl mx-auto"
+              variants={itemVariants}
+            >
+              A trusted name in Real Estate Finance and Asset Management in
+              India since 2016.
               <br />
-              Professional asset management designed for Indian investors and
-              visionary entrepreneurs.
+              Our mission is to provide secure investments, stable returns, and
+              long-term wealth creation.
             </motion.p>
             <motion.div
               className="flex flex-col sm:flex-row gap-6 justify-center"
@@ -258,7 +263,8 @@ export default function Home() {
               className="text-xl text-gray-100 text-center mb-12 leading-relaxed"
               variants={itemVariants}
             >
-              Redefining Real Estate Investment for Indian Investors
+              Where there are opportunities for large investors, we also make
+              the common investor a partner.
             </motion.p>
 
             {/* Content Paragraphs */}
@@ -271,14 +277,24 @@ export default function Home() {
                   <span className="font-semibold">
                     Aadhar Asset Management Co.
                   </span>{" "}
-            is a real estate–focused asset and property management platform that leverages technology, professional asset oversight, and structured reporting to deliver long-term, stable, and stress-free returns to property owners, trusts, LLPs (SPVs), and investor groups.
+                  company is working to fulfil the dreams of the people.
+                  Everyone has a dream to invest in real estate but it requires
+                  a lot of money and years of experience which is not within
+                  everyone's reach. That’s what we accomplish; we have a team of
+                  people, who are experienced in real estate, who develop and
+                  build Land, building, shop and commercial and residential
+                  projects in real estate by collecting funds. We purchase land
+                  and agricultural land and earn good profit in the time of 42
+                  to 24 months, We Sell it, and after deducting the cost of our
+                  profit, we distribute it among the people who have invested
+                  .{" "}
                 </p>
                 <p className="text-lg text-gray-50 leading-relaxed">
-                  Our vision is to bridge the gap between premium real estate
-                  opportunities and Indian investors by providing professional
-                  asset management, transparent transactions, and long-term
-                  value creation. We combine fintech innovation with real estate
-                  expertise to deliver exceptional returns and peace of mind.
+                  We Keep your investment in a bank with fixed deposits and
+                  fixed returns, Provides 4 to 5 times return on your investment
+                  amount as compared to other sources. Our company manages a
+                  range of public and private investment products and services
+                  for institutional and retail clients.
                 </p>
               </motion.div>
 
@@ -288,24 +304,24 @@ export default function Home() {
               >
                 {[
                   {
-                    title: "Expert Management",
+                    title: "Strategic Investment in Agricultural Land",
                     description:
-                      "Professional handling of your real estate portfolio with strategic planning and market insights.",
+                      "Planned investments in farmland aimed at long-term growth, stable returns, and sustainable value creation.",
                   },
                   {
-                    title: "Maximum Returns",
+                    title: "Commercial and Residential Projects",
                     description:
-                      "Optimized property performance and rental yields through smart asset allocation strategies.",
+                      "Well-planned developments designed for business growth, comfortable living, and long-term value appreciation.",
                   },
                   {
-                    title: "Complete Care",
+                    title: "Bank Auction Properties",
                     description:
-                      "End-to-end solutions from property maintenance to tenant management and legal compliance.",
+                      "High-value properties available at competitive prices through verified bank auction processes for smart investors.",
                   },
                   {
-                    title: "Growth Opportunities",
+                    title: "Warehouse, Farmhouse, and Layout Development",
                     description:
-                      "Access to exclusive investment opportunities and market trends to expand your wealth portfolio.",
+                      "End-to-end development solutions focused on infrastructure, planning, and long-term asset value creation.",
                   },
                 ].map((item, index) => (
                   <motion.div
@@ -328,13 +344,7 @@ export default function Home() {
                 variants={itemVariants}
               >
                 <p className="text-lg text-gray-50 leading-relaxed mb-6">
-                  Whether you're a seasoned investor or just beginning your real
-                  estate journey, Aadhar Asset Management is your partner in
-                  success. We combine market expertise, innovative solutions,
-                  and personalized service to help you achieve your financial
-                  goals.
-                  While traditional property management is typically limited to “rent collection and maintenance,”
-Aadhar goes further by focusing on data-backed asset monitoring, full lifecycle planning, and exit-ready asset management.
+                 We earn asset management income for doing so and ensure strong alignment of interests with our clients by investing alongside them. Our access to large-scale capital enables us to make investments in sizeable, premier assets and businesses across geographies and asset classes that we believe few others can. 
                 </p>
                 <motion.div
                   whileHover={{ scale: 1.05 }}
@@ -407,9 +417,9 @@ Aadhar goes further by focusing on data-backed asset monitoring, full lifecycle 
               Our Vision
             </h2>
             <p className="text-center text-muted-foreground text-lg mb-12 leading-relaxed">
-              To build an iconic skyline with affordable, sustainable, and
-              innovative real estate solutions that transform lives and create
-              lasting value for our customers, partners, and communities.
+             The right investment today brings peace of mind tomorrow.
+             Our goal is not just to earn profits,
+but to guide people toward secure and sustainable wealth creation.
             </p>
 
             <motion.div
@@ -488,7 +498,7 @@ Aadhar goes further by focusing on data-backed asset monitoring, full lifecycle 
               variants={itemVariants}
             >
               Transparent, accessible, and professionally managed real estate
-              investments designed for Indian investors
+              investments designed for investors
             </motion.p>
           </motion.div>
 
@@ -895,7 +905,7 @@ Aadhar goes further by focusing on data-backed asset monitoring, full lifecycle 
           >
             {[
               {
-                id: 'smart-real-estate-investment-strategies',
+                id: "smart-real-estate-investment-strategies",
                 title: "Smart Real Estate Investment Strategies",
                 excerpt:
                   "Learn the proven strategies to maximize your real estate investment returns and build long-term wealth.",
@@ -904,7 +914,7 @@ Aadhar goes further by focusing on data-backed asset monitoring, full lifecycle 
                 readTime: "5 min read",
               },
               {
-                id: 'top-10-locations-for-property-investment-in-2024',
+                id: "top-10-locations-for-property-investment-in-2024",
                 title: "Top 10 Locations for Property Investment in 2024",
                 excerpt:
                   "Discover the emerging neighborhoods and prime locations that offer the best growth potential for investors.",
@@ -913,7 +923,7 @@ Aadhar goes further by focusing on data-backed asset monitoring, full lifecycle 
                 readTime: "7 min read",
               },
               {
-                id: 'first-time-homebuyer-guide',
+                id: "first-time-homebuyer-guide",
                 title: "First-Time Homebuyer Guide",
                 excerpt:
                   "Everything you need to know about purchasing your first home, from financing to legal requirements.",
@@ -1037,7 +1047,7 @@ Aadhar goes further by focusing on data-backed asset monitoring, full lifecycle 
           </motion.div>
         </motion.div>
       </section>
-      <AssetManagement/>
+      <AssetManagement />
     </div>
   );
 }

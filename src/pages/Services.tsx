@@ -5,44 +5,44 @@ import { Link } from "react-router-dom";
 export default function Services() {
   const services = [
     {
-      title: "Property Asset Management",
+      title: "Best Investment Opportunities",
       description:
-        "Professional management of your real estate portfolio with strategic planning, regular maintenance, and optimization for maximum returns.",
+        "Identifying, structuring, and delivering high-potential investments focused on growth, security, and long-term value.",
       icon: "🏢",
       features: ["Portfolio optimization", "Performance monitoring", "Strategic planning"],
     },
     {
-      title: "Co-Investment Opportunities",
+      title: "Project Takeover and Management",
       description:
-        "Access exclusive co-investment opportunities in premium real estate projects designed for retail investors and HNIs.",
+        "End-to-end takeover and professional management of projects to ensure efficiency, compliance, and value enhancement.",
       icon: "📈",
       features: ["Curated opportunities", "Transparent terms", "Expected returns clarity"],
     },
     {
-      title: "Real Estate Consulting",
+      title: "Investment in Agricultural, Residential, and Commercial Properties",
       description:
-        "Expert advisory services covering market analysis, investment strategy, valuation, and long-term wealth creation planning.",
+        "Diversified real estate investments designed to balance growth, stability, and long-term returns across asset classes.",
       icon: "💼",
       features: ["Market insights", "Valuation analysis", "Strategy development"],
     },
     {
-      title: "Project Management",
+      title: "Participation in Housing and Corporate Projects",
       description:
         "End-to-end real estate project management ensuring timely delivery, quality standards, and regulatory compliance.",
       icon: "🎯",
       features: ["Timeline tracking", "Quality assurance", "Compliance management"],
     },
     {
-      title: "Fundraising & Capital",
+      title: "Warehouse and Farmhouse Land Investment",
       description:
-        "Structured fundraising solutions and capital management for real estate projects and co-investment ventures.",
+        "Strategic land investments focused on logistics, lifestyle development, and long-term asset appreciation.",
       icon: "💰",
       features: ["Capital structure", "Investor relations", "Fund administration"],
     },
     {
-      title: "Fintech Integration",
+      title: "Shop, Mall, and Commercial Unit Purchase",
       description:
-        "Technology-driven solutions for seamless investment management, portfolio tracking, and transparent investor communications.",
+        "Smart acquisition opportunities in high-footfall commercial spaces for steady income and long-term value growth.",
       icon: "💻",
       features: ["Digital portfolio", "Real-time tracking", "Secure transactions"],
     },

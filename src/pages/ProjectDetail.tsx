@@ -23,7 +23,7 @@ export default function ProjectDetail() {
       { name: 'Possession', value: 'Ready to Move' },
       { name: 'RERA No.', value: 'P123456789' }
     ],
-    image: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVhbCUyMGVzdGF0ZXxlbnwwfHwwfHx8MA%3D%3D',
+    image: 'https://images.unsplash.com/photo-158240794734-fd86f028f716?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVhbCUyMGVzdGF0ZXxlbnwwfHwwfHx8MA%3D%3D',
     gallery: [
       'https://img.freepik.com/free-photo/real-estate-sector_23-2151925471.jpg?semt=ais_hybrid&w=740&q=80',
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREt5oMjaGGS5xu_fqytZ9GqJcVFQw8uD84eg&s',

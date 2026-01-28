@@ -2,6 +2,12 @@ import { MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import property1 from "../assets/property1.jpeg"
+import property2 from "../assets/property2.jpeg"
+import property3 from "../assets/property3.jpeg"
+import property4 from "../assets/property4.jpeg"
+import property5 from "../assets/property5.jpeg"
+import property6 from "../assets/property6.jpeg"
 
 export default function Projects() {
   const projects = [
@@ -10,78 +16,78 @@ export default function Projects() {
       name: "Premium Residential Apartments - Phase 1",
       categoryKey: "ready",
       categoryLabel: "Ready to Move",
-      location: "Metropolitan City",
+      location: "City Prime Location",
       type: "Residential Apartments",
       description:
-        "Modern 2 & 3 BHK apartments with world-class amenities and premium finishing, perfect for co-investment.",
+        "Modern 2 & 3 BHK apartments designed for comfortable urban living, featuring premium construction quality, essential amenities, and strong rental demand potential.",
       amenities: ["Swimming Pool", "Gymnasium", "Community Hall", "24/7 Security"],
       image:
-        "https://media.istockphoto.com/id/2154752387/photo/real-estate-concept-business-home-insurance-and-real-estate-protection-real-estate-investment.jpg?s=612x612&w=0&k=20&c=r6Tmn31ZHHr-8ZuWfZaYIYdqM9nD4dMc6NfDXxwsZeo=",
+        property1,
     },
     {
       id: 2,
       name: "Prime Investment Plots Series",
       categoryKey: "plots",
-      categoryLabel: "Investment Plots",
+      categoryLabel: "Developing Growth Corridor",
       location: "Growth Corridor",
       type: "Residential Plots",
       description:
-        "Prime location residential plots ranging from 500 sq.ft to 2000 sq.ft with excellent connectivity and appreciation potential.",
+        "Well-planned residential plots with clear titles and internal infrastructure, strategically located for future development and steady price appreciation.",
       amenities: ["Wide Roads", "Green Space", "Water Facility", "Electricity Connection"],
       image:
-        "https://images.unsplash.com/photo-1582407947304-fd86f028f716?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVhbCUyMGVzdGF0ZXxlbnwwfHwwfHx8MA%3D%3D",
+        property2,
     },
     {
       id: 3,
-      name: "Luxury Duplex Villas",
+      name: "Premium Residential Zone",
       categoryKey: "ready",
       categoryLabel: "Ready to Move",
       location: "Premium District",
-      type: "Duplex Villas",
+      type: "Long-term capital growth",
       description:
-        "Luxurious duplex villas with private gardens and modern architecture, ideal for high-net-worth individuals.",
+        "Spacious duplex villas with private open spaces, modern elevation, and low-density planning—ideal for premium living and high-value asset ownership.",
       amenities: ["Private Garden", "Parking", "Modern Kitchen", "Study Room"],
       image:
-        "https://www.shutterstock.com/image-photo/real-estate-concept-business-home-260nw-2466887543.jpg",
+        property3,
     },
     {
       id: 4,
       name: "Commercial Plaza - Retail Hub",
       categoryKey: "monthly",
-      categoryLabel: "Monthly Return Projects",
+      categoryLabel: "High-Footfall Business District",
       location: "Business District",
       type: "Commercial Spaces",
       description:
-        "State-of-the-art commercial spaces ideal for retail, offices, and business operations with high footfall potential.",
+        "Retail and office spaces located in a busy commercial zone, offering excellent visibility, regular rental income, and strong business occupancy potential.",
       amenities: ["High Visibility", "Ample Parking", "24/7 Power", "Security"],
       image:
-        "https://st2.depositphotos.com/20515402/50652/i/450/depositphotos_506521084-stock-photo-estate-agent-giving-house-keys.jpg",
+        property4,
     },
     {
       id: 5,
       name: "Premium Co-Investment Project",
       categoryKey: "monthly",
-      categoryLabel: "Monthly Return Projects",
+      categoryLabel: "ProjectsStrategic Investment Location",
       location: "Strategic Location",
       type: "Investment Project",
       description:
-        "Premium co-investment opportunity with transparent returns, professional asset management, and regulatory compliance.",
+        "A professionally managed co-investment opportunity with defined exit planning, transparent structure, and regulatory-compliant asset management.",
       amenities: ["Transparent Returns", "Asset Management", "Legal Security", "Professional Team"],
       image:
-        "https://images.pexels.com/photos/1546168/pexels-photo-1546168.jpeg?cs=srgb&dl=pexels-davidmcbee-1546168.jpg&fm=jpg",
+        property5,
     },
     {
       id: 6,
       name: "Mixed-Use Development - Phase 2",
       categoryKey: "plots",
-      categoryLabel: "Investment Plots",
+      categoryLabel: "Upcoming Growth Zone",
       location: "Future Growth Zone",
       type: "Development Project",
       description:
-        "Upcoming mixed-use development featuring residential and commercial spaces with strong appreciation prospects.",
+        "Integrated residential and commercial development planned in a future growth area, designed to benefit from infrastructure expansion and long-term appreciation.",
       amenities: ["Under Development", "Grand Opening Soon", "Pre-Launch Offer", "Flexible Payment"],
       image:
-        "https://img.freepik.com/free-photo/real-estate-sector_23-2151925471.jpg?semt=ais_hybrid&w=740&q=80",
+        property6,
     },
   ];
 

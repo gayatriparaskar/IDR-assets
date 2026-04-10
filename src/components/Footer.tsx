@@ -55,10 +55,18 @@ export default function Footer() {
           <div>
             <h3 className="font-bold mb-4">Services</h3>
             <ul className="space-y-2">
-              <li className="text-sm opacity-90">Residential Properties</li>
-              <li className="text-sm opacity-90">Investment Opportunities</li>
-              <li className="text-sm opacity-90">Real Estate Consultation</li>
-              <li className="text-sm opacity-90">Project Partnership</li>
+              <li className="text-sm opacity-90"><Link to="/services" className="text-sm hover:opacity-80 transition-opacity">
+                Residential Properties
+                </Link></li>
+              <li className="text-sm opacity-90"><Link to="/services" className="text-sm hover:opacity-80 transition-opacity">
+                  Investment Opportunities
+                </Link></li>
+              <li className="text-sm opacity-90"><Link to="/services" className="text-sm hover:opacity-80 transition-opacity">
+                  Real Estate Consultation
+                </Link></li>
+              <li className="text-sm opacity-90"><Link to="/services" className="text-sm hover:opacity-80 transition-opacity">
+                  Project Partnership
+                </Link></li>
             </ul>
           </div>
 
@@ -70,9 +78,9 @@ export default function Footer() {
                 <MapPin size={18} className="flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-sm">
-                    1st Floor, Shop No. 2, Bhagat Plaza
+                    Aadhar asset management.  
                   </p>
-                  <p className="text-sm">Pandumal Chauraha, Burhanpur 450331</p>
+                  <p className="text-sm"> In front of navgrah Mandir Joshi Wada Burhanpur (M.P.)</p>
                 </div>
               </div>
               <div className="flex gap-3 items-center">
@@ -81,14 +89,14 @@ export default function Footer() {
                   href="mailto:aadharshilaRealtors22@gmail.com"
                   className="text-sm hover:opacity-80 transition-opacity"
                 >
-                  aadharshilaRealtors22@gmail.com
+                  aadharassetm@gmail.com
                 </a>
               </div>
               <div className="flex gap-3 items-start">
                 <Phone size={18} className="flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-sm">7000654305</p>
-                  <p className="text-sm">9893812025</p>
+                  <p className="text-sm">+917000275998</p>
+                 
                 </div>
               </div>
             </div>

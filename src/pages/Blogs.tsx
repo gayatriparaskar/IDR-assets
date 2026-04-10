@@ -2,6 +2,8 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Calendar, Clock, User, Tag } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { blogService, BlogPost, getImageUrl } from "../services/blogService";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -23,83 +25,57 @@ const itemVariants = {
   },
 };
 
-// Enhanced mock data with more comprehensive blog content
-const blogPosts = [
-  {
-    id: 'smart-real-estate-investment-strategies',
-    title: "Smart Real Estate Investment Strategies for 2024",
-    excerpt: "Discover proven strategies to maximize your real estate investment returns and build long-term wealth in today's market.",
-    date: "January 15, 2024",
-    author: "Aadhar Team",
-    readTime: "5 min read",
-    category: "Investment Tips",
-    image: "https://images.pexels.com/photos/3556058/pexels-photo-3556058.jpeg",
-    tags: ["investment", "strategy", "real estate"],
-    icon: "📈"
-  },
-  {
-    id: 'top-10-locations-for-property-investment-2024',
-    title: "Top 10 Locations for Property Investment in 2024",
-    excerpt: "Explore emerging neighborhoods and prime locations that offer the best growth potential for real estate investors this year.",
-    date: "January 10, 2024",
-    author: "Research Team",
-    readTime: "7 min read",
-    category: "Market Analysis",
-    image: "https://images.pexels.com/photos/3502632/pexels-photo-3502632.jpeg",
-    tags: ["locations", "investment", "market analysis"],
-    icon: "🏆"
-  },
-  {
-    id: 'first-time-homebuyer-guide',
-    title: "Complete Guide for First-Time Homebuyers",
-    excerpt: "Everything you need to know about purchasing your first home, from financing to legal requirements and beyond.",
-    date: "January 5, 2024",
-    author: "Property Experts",
-    readTime: "6 min read",
-    category: "Home Buying",
-    image: "https://images.pexels.com/photos/1438761/pexels-photo-1438761.jpeg",
-    tags: ["home buying", "first-time buyer", "guide"],
-    icon: "🏠"
-  },
-  {
-    id: 'commercial-vs-residential-investment',
-    title: "Commercial vs Residential Investment: Which is Better?",
-    excerpt: "Compare the pros and cons of commercial and residential real estate investments to make informed decisions.",
-    date: "December 28, 2023",
-    author: "Investment Analyst",
-    readTime: "8 min read",
-    category: "Investment Analysis",
-    image: "https://images.pexels.com/photos/2998543/pexels-photo-2998543.jpeg",
-    tags: ["commercial", "residential", "comparison"],
-    icon: "🏢"
-  },
-  {
-    id: 'real-estate-market-trends-2024',
-    title: "Real Estate Market Trends to Watch in 2024",
-    excerpt: "Stay ahead of the curve with these emerging trends that will shape the real estate market this year.",
-    date: "December 20, 2023",
-    author: "Market Research Team",
-    readTime: "6 min read",
-    category: "Market Trends",
-    image: "https://images.pexels.com/photos/3833519/pexels-photo-3833519.jpeg",
-    tags: ["trends", "technology", "sustainability"],
-    icon: "📊"
-  },
-  {
-    id: 'property-valuation-methods',
-    title: "Understanding Property Valuation Methods",
-    excerpt: "Learn different approaches to property valuation and how professionals determine the true worth of real estate assets.",
-    date: "December 15, 2023",
-    author: "Valuation Experts",
-    readTime: "7 min read",
-    category: "Property Valuation",
-    image: "https://images.pexels.com/photos/3348519/pexels-photo-3348519.jpeg",
-    tags: ["valuation", "methods", "property assessment"],
-    icon: "📋"
-  },
-];
-
 export default function Blog() {
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        setLoading(true);
+        const data = await blogService.getAllBlogs();
+        setBlogPosts(data);
+        setError(null);
+      } catch (err) {
+        setError('Failed to load blog posts. Please try again later.');
+        console.error('Error fetching blogs:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="pt-20 min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading blog posts...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="pt-20 min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto px-4">
+          <h2 className="text-2xl font-bold text-primary mb-4">Oops! Something went wrong</h2>
+          <p className="text-gray-600 mb-6">{error}</p>
+          <button 
+            onClick={() => window.location.reload()}
+            className="px-6 py-3 bg-primary text-white rounded-lg hover:opacity-90 transition-opacity"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="pt-20 min-h-screen bg-white">
       {/* Hero Section */}
@@ -124,79 +100,96 @@ export default function Blog() {
       {/* Blog Posts Grid */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            {blogPosts.map((post, index) => (
-              <motion.div
-                key={post.id}
-                className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col"
-                variants={itemVariants}
-                whileHover={{ y: -5 }}
-              >
-                {/* Blog Image */}
-                <div className="h-48 overflow-hidden relative">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-primary text-white px-3 py-1 rounded-full text-xs font-semibold">
-                      {post.category}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Blog Content */}
-                <div className="p-6 flex flex-col flex-grow">
-                  {/* Meta Information */}
-                  <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
-                    <div className="flex items-center gap-1">
-                      <Calendar size={14} />
-                      <span>{post.date}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock size={14} />
-                      <span>{post.readTime}</span>
-                    </div>
-                  </div>
-
-                  {/* Title and Excerpt */}
-                  <h3 className="text-xl font-bold text-primary mb-3 flex-grow">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed mb-4">
-                    {post.excerpt}
-                  </p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {post.tags.map((tag, tagIndex) => (
-                      <span
-                        key={tagIndex}
-                        className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs"
-                      >
-                        {tag}
+          {blogPosts.length === 0 ? (
+            <div className="text-center py-12">
+              <h3 className="text-xl font-semibold text-gray-600 mb-2">No blog posts available</h3>
+              <p className="text-gray-500">Check back later for new content.</p>
+            </div>
+          ) : (
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              initial="hidden"
+              animate="visible"
+              variants={containerVariants}
+            >
+              {blogPosts.map((post) => (
+                <motion.div
+                  key={post.id}
+                  className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col"
+                  variants={itemVariants}
+                  whileHover={{ y: -5 }}
+                >
+                  {/* Blog Image */}
+                  <div className="h-48 overflow-hidden relative">
+                    {post.image && (
+                      <img
+                        src={getImageUrl(post.image)}
+                        alt={post.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        onLoad={(e) => {
+                          console.log('Image loaded successfully:', getImageUrl(post.image));
+                        }}
+                        onError={(e) => {
+                          console.error('Image failed to load:', getImageUrl(post.image));
+                          console.error('Error event:', e);
+                          e.currentTarget.style.display = 'none';
+                        }}
+                      />
+                    )}
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-primary text-white px-3 py-1 rounded-full text-xs font-semibold">
+                        {post.category}
                       </span>
-                    ))}
+                    </div>
                   </div>
 
-                  {/* Read More Link */}
-                  {/* <Link
-                    to={`/blog/${post.id}`}
-                    className="inline-flex items-center gap-2 text-secondary font-semibold hover:text-primary transition-colors duration-200"
-                  >
-                    Read Full Article
-                    <ArrowRight size={16} />
-                  </Link> */}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+                  {/* Blog Content */}
+                  <div className="p-6 flex flex-col flex-grow">
+                    {/* Meta Information */}
+                    <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
+                      <div className="flex items-center gap-1">
+                        <Calendar size={14} />
+                        <span>{post.date}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Clock size={14} />
+                        <span>{post.readTime}</span>
+                      </div>
+                    </div>
+
+                    {/* Title and Excerpt */}
+                    <h3 className="text-xl font-bold text-primary mb-3 flex-grow">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed mb-4">
+                      {post.excerpt}
+                    </p>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {post.tags.map((tag, tagIndex) => (
+                        <span
+                          key={tagIndex}
+                          className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Read More Link */}
+                    <Link
+                      to={`/blog/${post.id}`}
+                      className="inline-flex items-center gap-2 text-secondary font-semibold hover:text-primary transition-colors duration-200"
+                    >
+                      Read Full Article
+                      <ArrowRight size={16} />
+                    </Link>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
         </div>
       </section>
 

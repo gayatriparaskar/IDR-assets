@@ -48,7 +48,7 @@ useEffect(() => {
      },
       ];
       setTeam(fallbackTeam);
-      setError('Using fallback data - API not available');
+      setError('');
     } finally {
       setLoading(false);
     }

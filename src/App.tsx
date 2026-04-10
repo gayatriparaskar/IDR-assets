@@ -88,7 +88,7 @@ const App = () => (
             }
           />
           <Route
-            path="/blog/:id"
+            path="/blog/:postId"
             element={
               <AppLayout>
                 <BlogPost />

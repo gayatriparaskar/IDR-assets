@@ -16,13 +16,13 @@ interface PartnerSliderProps {
 }
 
 const defaultPartners: Partner[] = [
-  { id: 1, name: "Premier Estates", icon: "🏢", type: "Real Estate" },
-  { id: 2, name: "Build Corp", icon: "🏗️", type: "Construction" },
-  { id: 3, name: "FinanceWave", icon: "📊", type: "Finance" },
-  { id: 4, name: "Infrastructure Pro", icon: "🔧", type: "Infrastructure" },
-  { id: 5, name: "NextGen Solutions", icon: "🌟", type: "Innovation" },
-  { id: 6, name: "Global Ventures", icon: "💼", type: "Enterprise" },
-  { id: 7, name: "Tech Horizon", icon: "🚀", type: "Technology" },
+  { id: 1, name: "Aadhar Shila ", icon: "🏢", type: "Real Estate" },
+  { id: 2, name: "IDR24x7", icon: "🏗️", type: "Digital Real Estate" },
+  { id: 3, name: "Akrypt IT Solutions PVT LTD", icon: "🚀", type: "Technology" },
+  { id: 4, name: "FinanceWave", icon: "📊", type: "Finance" },
+  { id: 5, name: "Infrastructure Pro", icon: "🔧", type: "Infrastructure" },
+  { id: 6, name: "NextGen Solutions", icon: "🌟", type: "Innovation" },
+  { id: 7, name: "Global Ventures", icon: "💼", type: "Enterprise" },
   { id: 8, name: "Strategic Partners", icon: "🎯", type: "Strategy" },
 ];
 

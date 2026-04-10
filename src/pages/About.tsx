@@ -27,15 +27,25 @@ useEffect(() => {
       // Fallback to static data if API fails
       const fallbackTeam = [
         {
-          name: "Ashish Kumar",
-          position: "Chief Executive Officer",
-          description: "Visionary leader with 15+ years in real estate and asset management."
-        },
-        {
-          name: "Priya Sharma",
-          position: "Head of Investments",
-          description: "Expert in portfolio strategy and investor relations."
-        }
+     name: "Ashish Kumar",
+       position: "Chief Executive Officer",
+       description: "Visionary leader with 15+ years in real estate and asset management, specializing in fintech-real estate integration.",
+     },
+     {
+       name: "Priya Sharma",
+       position: "Head of Investments",
+       description: "Expert in portfolio strategy and investor relations, ensuring transparent returns and risk management.",
+     },
+     {
+       name: "Rajesh Patel",
+       position: "Chief Compliance Officer",
+       description: "Ensures regulatory compliance and protects investor interests with comprehensive legal frameworks.",
+   },
+   {
+       name: "Neha Verma",
+       position: "Asset Manager",
+       description: "Manages investment portfolios and oversees property performance to maximize investor returns.",
+     },
       ];
       setTeam(fallbackTeam);
       setError('Using fallback data - API not available');

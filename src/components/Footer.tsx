@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import logo from "../assets/logo.jpeg";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="section-container">
-        <div className="py-16 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Company Info */}
           <div>
             <div className="flex items-center gap-2 mb-4">
@@ -70,7 +70,51 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Social Media */}
+          <div>
+            <h3 className="font-bold mb-4">Follow Us</h3>
+            <div className="flex gap-4">
+              <a
+                href="https://www.facebook.com/profile.php?id=100091499445324"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-opacity-20 transition-all duration-200"
+                aria-label="Facebook"
+              >
+                <Facebook size={20} />
+              </a>
+              <a
+                href="https://www.instagram.com/aadharassetm?utm_source=qr&igsh=MXc3YW5id2xrNm5nYw=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-opacity-20 transition-all duration-200"
+                aria-label="Instagram"
+              >
+                <Instagram size={20} />
+              </a>
+              {/* <a
+                href="https://www.linkedin.com/company/aadharshila-realtors"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-opacity-20 transition-all duration-200"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={20} />
+              </a> */}
+              <a
+                href="https://www.youtube.com/@AadharAssetManagement"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-opacity-20 transition-all duration-200"
+                aria-label="YouTube"
+              >
+                <Youtube size={20} />
+              </a>
+            </div>
+            <p className="text-sm opacity-90 mt-4">
+              Connect with us on social media for latest updates and property listings.
+            </p>
+          </div>
           <div>
             <h3 className="font-bold mb-4">Contact Us</h3>
             <div className="space-y-3">

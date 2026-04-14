@@ -1,8 +1,9 @@
 import { CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { API_URLS } from '../config/api';
 
-  interface TeamMember {
+interface TeamMember {
   name: string;
   position: string;
   description: string;
@@ -12,50 +13,46 @@ export default function About() {
   const [team, setTeam] = useState<TeamMember[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-useEffect(() => {
-  const fetchTeamData = async () => {
-    try {
-      const response = await fetch('http://localhost:5000/api/team-members');
-      if (!response.ok) {
-        throw new Error('Failed to fetch team data');
-      }
-      const data = await response.json(); // Fixed: Use response.json() instead of response.data
-      console.log("Team data:", data);
-      setTeam(data.data);
-    } catch (err) {
-      console.error('Error fetching team data:', err);
-      // Fallback to static data if API fails
-      const fallbackTeam = [
-        {
-     name: "Ashish Kumar",
-       position: "Chief Executive Officer",
-       description: "Visionary leader with 15+ years in real estate and asset management, specializing in fintech-real estate integration.",
-     },
-     {
-       name: "Priya Sharma",
-       position: "Head of Investments",
-       description: "Expert in portfolio strategy and investor relations, ensuring transparent returns and risk management.",
-     },
-     {
-       name: "Rajesh Patel",
-       position: "Chief Compliance Officer",
-       description: "Ensures regulatory compliance and protects investor interests with comprehensive legal frameworks.",
-   },
-   {
-       name: "Neha Verma",
-       position: "Asset Manager",
-       description: "Manages investment portfolios and oversees property performance to maximize investor returns.",
-     },
-      ];
-      setTeam(fallbackTeam);
-      setError('');
-    } finally {
-      setLoading(false);
-    }
-  };
 
-  fetchTeamData();
-}, []);
+  useEffect(() => {
+    const fetchTeamData = async () => {
+      try {
+        // const response = await fetch(API_URLS.TEAM_MEMBERS);
+        if (!response.ok) {
+          throw new Error('Failed to fetch team data');
+        }
+        const data = await response.json();
+        console.log("Team data:", data);
+        setTeam(data.data);
+      } catch (err) {
+        console.error('Error fetching team data:', err);
+        // Use the provided team data as fallback
+        const actualTeam = [
+          {
+            name: "Er. Nilesh Morkar",
+            position: "Founder & CEO - Aadhar Asset Management",
+            description: "A visionary leader with 12+ years of experience in real estate and asset management, focused on making property investment simple, transparent, and accessible for every Indian through digital innovation."
+          },
+          {
+            name: "Komal Joshi",
+            position: "Head of Investment - Aadhar Asset Management",
+            description: "An investment expert focused on portfolio strategy, investor relations, and delivering transparent, high-growth opportunities."
+          },
+          {
+            name: "Er. Harsha Vavre",
+            position: "Asset Manager - Aadhar Asset Management",
+            description: "A skilled asset manager focused on optimizing property performance, ensuring efficient management, and maximizing investor returns."
+          }
+        ];
+        setTeam(actualTeam);
+        setError('');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTeamData();
+  }, []);
   const values = [
     {
       title: "Transparency",
@@ -278,7 +275,7 @@ We want every partner and client experience to be the talk of a life time.      
           <div className="text-center text-red-500 mb-8">{error}</div>
         ) : null}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {Array.isArray(team) && team.map((member, index) => (
             <motion.div
               key={index}

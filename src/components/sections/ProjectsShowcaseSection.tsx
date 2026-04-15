@@ -95,9 +95,23 @@ export default function ProjectsShowcaseSection({
     fetchProperties();
   }, []);
 
+  // State for processed data
+  const [displayResidentialImages, setDisplayResidentialImages] = useState<string[]>([]);
+  const [displayInvestmentImages, setDisplayInvestmentImages] = useState<string[]>([]);
+  const [displayResidentialFeatures, setDisplayResidentialFeatures] = useState<string[]>([]);
+  const [displayInvestmentSpecifications, setDisplayInvestmentSpecifications] = useState<string[]>([]);
+
   // Process properties data from API
   useEffect(() => {
     if (properties.length === 0) return;
+
+    // Filter properties to only show "coming soon" status
+    const comingSoonProperties = properties.filter(property => 
+      property.status === 'coming soon'
+    );
+      setProperties(comingSoonProperties);
+    console.log('Coming soon properties:', comingSoonProperties);
+    console.log('All properties:', properties);
 
     // Extract images from properties (handle both single image and multiple images)
     const extractImages = (property: Property): string[] => {
@@ -136,45 +150,53 @@ export default function ProjectsShowcaseSection({
         .map(feature => feature.name);
     };
 
-    // Get all images and features
-    const allPropertyImages = properties.flatMap(extractImages);
-    const allPropertyFeatures = properties.flatMap(extractFeatures);
+    // Process properties for display
+    if (comingSoonProperties.length > 0) {
+      // Get images for first property (residential)
+      const residentialImages = extractImages(comingSoonProperties[0]);
+      setDisplayResidentialImages(residentialImages);
 
-    // For now, use first property for residential and second for investment
-    // This can be made more sophisticated based on actual property types
-    const firstProperty = properties[0];
-    const secondProperty = properties[1] || properties[0];
+      // Get features for first property
+      const residentialFeatures = extractFeatures(comingSoonProperties[0]);
+      setDisplayResidentialFeatures(residentialFeatures.length > 0 ? residentialFeatures : [
+        "World-class amenities and facilities",
+        "Green spaces and landscaping", 
+        "24/7 security and maintenance",
+        "Flexible payment options"
+      ]);
 
-    setFinalResidentialImages(extractImages(firstProperty));
-    setFinalInvestmentImages(extractImages(secondProperty));
-    setResidentialFeatures(extractFeatures(firstProperty));
-    setInvestmentSpecifications(extractFeatures(secondProperty));
+      // Process second property if available (investment)
+      if (comingSoonProperties.length > 1) {
+        const investmentImages = extractImages(comingSoonProperties[1]);
+        setDisplayInvestmentImages(investmentImages);
+
+        const investmentFeatures = extractFeatures(comingSoonProperties[1]);
+        setDisplayInvestmentSpecifications(investmentFeatures.length > 0 ? investmentFeatures : [
+          "500 - 2000 sq.ft. available",
+          "Clear title and legal documentation",
+          "Wide roads and utilities ready",
+          "High appreciation potential"
+        ]);
+      } else {
+        // Use first property for both sections if only one coming soon property exists
+        setDisplayInvestmentImages(residentialImages);
+        setDisplayInvestmentSpecifications([
+          "500 - 2000 sq.ft. available",
+          "Clear title and legal documentation",
+          "Wide roads and utilities ready",
+          "High appreciation potential"
+        ]);
+      }
+    } else {
+      console.log('No coming soon properties found');
+      // Set empty arrays if no coming soon properties
+      setDisplayResidentialImages([]);
+      setDisplayResidentialFeatures([]);
+      setDisplayInvestmentImages([]);
+      setDisplayInvestmentSpecifications([]);
+    }
   }, [properties]);
 
-  // State for processed data
-  const [finalResidentialImages, setFinalResidentialImages] = useState<string[]>([]);
-  const [finalInvestmentImages, setFinalInvestmentImages] = useState<string[]>([]);
-  const [residentialFeatures, setResidentialFeatures] = useState<string[]>([]);
-  const [investmentSpecifications, setInvestmentSpecifications] = useState<string[]>([]);
-
-  // Fallback images if API doesn't provide any
-  const displayResidentialImages = finalResidentialImages.length > 0 ? finalResidentialImages : residentialImages;
-  const displayInvestmentImages = finalInvestmentImages.length > 0 ? finalInvestmentImages : investmentImages;
-
-  // Fallback features if API doesn't provide any
-  const displayResidentialFeatures = residentialFeatures.length > 0 ? residentialFeatures : [
-    "World-class amenities and facilities",
-    "Green spaces and landscaping", 
-    "24/7 security and maintenance",
-    "Flexible payment options"
-  ];
-
-  const displayInvestmentSpecifications = investmentSpecifications.length > 0 ? investmentSpecifications : [
-    "500 - 2000 sq.ft. available",
-    "Clear title and legal documentation",
-    "Wide roads and utilities ready",
-    "High appreciation potential"
-  ];
   return (
     <section className="section-padding bg-white">
       <div className="section-container">
@@ -217,7 +239,9 @@ export default function ProjectsShowcaseSection({
                   autoplayDelay={5000}
                   title="Residential Properties"
                   subtitle={properties[0]?.description || "Modern living spaces with premium amenities"}
+                  status={properties[0]?.status}
                 />
+             
               </motion.div>
 
               {/* Right - Content */}
@@ -231,6 +255,15 @@ export default function ProjectsShowcaseSection({
                   <div>
                     <h3 className="text-2xl font-bold text-primary mb-3 flex items-center gap-3">
                       <span className="text-3xl">{'\ud83c\udfe2'}</span> {properties[0]?.name || "Residential Excellence"}
+                      <span className={`ml-2 px-2 py-1 text-xs rounded-full ${
+                        properties[0]?.status === 'published' 
+                          ? 'bg-green-100 text-green-800' 
+                          : properties[0]?.status === 'draft'
+                          ? 'bg-yellow-100 text-yellow-800'
+                          : 'bg-gray-100 text-gray-800'
+                      }`}>
+                        {properties[0]?.status?.toUpperCase() }
+                      </span>
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
                       {properties[0]?.description || "Our residential projects feature state-of-the-art architecture, modern amenities, and sustainable design. Each property is thoughtfully planned to create vibrant communities."}
@@ -269,6 +302,15 @@ export default function ProjectsShowcaseSection({
                   <div>
                     <h3 className="text-2xl font-bold text-primary mb-3 flex items-center gap-3">
                       <span className="text-3xl">{'\ud83d\udccd'}</span> {properties[1]?.name || properties[0]?.name || "Investment Plots"}
+                      <span className={`ml-2 px-2 py-1 text-xs rounded-full ${
+                        (properties[1] || properties[0])?.status === 'live' 
+                          ? 'bg-green-100 text-green-800' 
+                          : (properties[1] || properties[0])?.status === 'coming soon'
+                          ? 'bg-yellow-100 text-yellow-800'
+                          : 'bg-gray-100 text-gray-800'
+                      }`}>
+                        {(properties[1] || properties[0])?.status?.toUpperCase() || 'draft'}
+                      </span>
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
                       {properties[1]?.description || properties[0]?.description || "Prime location residential plots with excellent connectivity and growth potential. Ideal for building your dream home or as a sound investment for future returns."}
@@ -306,7 +348,10 @@ export default function ProjectsShowcaseSection({
                   autoplayDelay={5000}
                   title="Investment Properties"
                   subtitle={properties[1]?.description || properties[0]?.description || "Prime locations with high growth potential"}
+                  status={(properties[1] || properties[0])?.status}
                 />
+               
+                
               </motion.div>
             </div>
           </>

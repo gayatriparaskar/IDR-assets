@@ -1,16 +1,82 @@
 import { MapPin } from "lucide-react";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import property1 from "../assets/property1.jpeg"
-import property2 from "../assets/property2.jpeg"
-import property3 from "../assets/property3.jpeg"
-import property4 from "../assets/property4.jpeg"
-import property5 from "../assets/property5.jpeg"
-import property6 from "../assets/property6.jpeg"
+import { API_URLS, API_BASE_URL } from "../config/api";
+
+interface Property {
+  _id: string;
+  name: string;
+  description: string;
+  status: string;
+  image?: string;
+  images?: Array<{
+    url: string;
+    isFeatured: boolean;
+    _id: string;
+  }>;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    postalCode: string;
+    country: string;
+    latitude: number;
+    longitude: number;
+  };
+  features: Array<{
+    name: string;
+    value: string;
+    _id: string;
+  }>;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Helper function to get proper image URL
+const getImageUrl = (imagePath: string | null | undefined): string => {
+  if (!imagePath) return '';
+  if (imagePath.startsWith('http')) return imagePath;
+  return `${API_BASE_URL}${imagePath}`;
+};
 
 export default function Projects() {
-  const projects = [
+  const [projects, setProjects] = useState<Property[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(API_URLS.PROPERTIES);
+        if (!response.ok) {
+          throw new Error('Failed to fetch projects');
+        }
+        const data = await response.json();
+        console.log('Projects data:', data);
+        
+        // Handle API response structure
+        let projectsData = [];
+        if (data.success && data.properties) {
+          projectsData = data.properties;
+        } else if (Array.isArray(data)) {
+          projectsData = data;
+        }
+        
+        setProjects(projectsData);
+      } catch (err) {
+        console.error('Error fetching projects:', err);
+        setError('Failed to load projects');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  // Fallback dummy data if API fails
+  const dummyProjects = [
     {
       id: 1,
       name: "Premium Residential Apartments - Phase 1",
@@ -21,8 +87,7 @@ export default function Projects() {
       description:
         "Modern 2 & 3 BHK apartments designed for comfortable urban living, featuring premium construction quality, essential amenities, and strong rental demand potential.",
       amenities: ["Swimming Pool", "Gymnasium", "Community Hall", "24/7 Security"],
-      image:
-        property1,
+      image: "/api/placeholder/property1.jpg",
     },
     {
       id: 2,
@@ -34,8 +99,7 @@ export default function Projects() {
       description:
         "Well-planned residential plots with clear titles and internal infrastructure, strategically located for future development and steady price appreciation.",
       amenities: ["Wide Roads", "Green Space", "Water Facility", "Electricity Connection"],
-      image:
-        property2,
+      image: "/api/placeholder/property2.jpg",
     },
     {
       id: 3,
@@ -47,8 +111,7 @@ export default function Projects() {
       description:
         "Spacious duplex villas with private open spaces, modern elevation, and low-density planning—ideal for premium living and high-value asset ownership.",
       amenities: ["Private Garden", "Parking", "Modern Kitchen", "Study Room"],
-      image:
-        property3,
+      image: "/api/placeholder/property3.jpg",
     },
     {
       id: 4,
@@ -60,21 +123,19 @@ export default function Projects() {
       description:
         "Retail and office spaces located in a busy commercial zone, offering excellent visibility, regular rental income, and strong business occupancy potential.",
       amenities: ["High Visibility", "Ample Parking", "24/7 Power", "Security"],
-      image:
-        property4,
+      image: "/api/placeholder/property4.jpg",
     },
     {
       id: 5,
       name: "Premium Co-Investment Project",
       categoryKey: "monthly",
-      categoryLabel: "ProjectsStrategic Investment Location",
+      categoryLabel: "Strategic Investment Location",
       location: "Strategic Location",
       type: "Investment Project",
       description:
         "A professionally managed co-investment opportunity with defined exit planning, transparent structure, and regulatory-compliant asset management.",
       amenities: ["Transparent Returns", "Asset Management", "Legal Security", "Professional Team"],
-      image:
-        property5,
+      image: "/api/placeholder/property5.jpg",
     },
     {
       id: 6,
@@ -86,10 +147,43 @@ export default function Projects() {
       description:
         "Integrated residential and commercial development planned in a future growth area, designed to benefit from infrastructure expansion and long-term appreciation.",
       amenities: ["Under Development", "Grand Opening Soon", "Pre-Launch Offer", "Flexible Payment"],
-      image:
-        property6,
+      image: "/api/placeholder/property6.jpg",
     },
   ];
+
+  // Use API data or fallback to dummy data
+  const displayProjects = projects.length > 0 ? projects : dummyProjects;
+
+  // Process API projects to match dummy data structure
+  const processedProjects = displayProjects.map((project, index) => {
+    // Check if this is API project or dummy project
+    const isApiProject = project._id !== undefined;
+    
+    // Extract images from API project
+    const projectImages = isApiProject && project.images ? project.images : [];
+    const featuredImage = isApiProject ? projectImages.find((img: any) => img.isFeatured) || projectImages[0] : null;
+    const imageUrl = isApiProject && featuredImage ? getImageUrl(featuredImage.url) : 
+                    isApiProject && project.image ? getImageUrl(project.image) : 
+                    (project as any).image;
+
+    // Extract features from API project
+    const features = isApiProject && project.features ? 
+      project.features.filter((f: any) => f.name && f.name.trim() !== '').map((f: any) => f.name) :
+      (project as any).amenities || [];
+
+    return {
+      id: isApiProject ? project._id : (project as any).id,
+      name: project.name,
+      categoryKey: isApiProject && project.status === 'live' ? 'draft' : 'coming soon',
+      categoryLabel: isApiProject && project.status === 'live' ? 'Ready to Move' : 'Draft',
+      location: isApiProject ? `${(project as any).address?.city}, ${(project as any).address?.state}` : (project as any).location,
+      type: isApiProject && project.features ? project.features.find((f: any) => f.name.toLowerCase().includes('residential'))?.name || 'Property' : (project as any).type,
+      description: project.description,
+      amenities: features.length > 0 ? features : (project as any).amenities || [],
+      image: imageUrl,
+      status: isApiProject ? (project as any).status : (project as any).status || 'draft'
+    };
+  });
 
   const categories = [
     { key: "All", label: "All" },
@@ -102,72 +196,112 @@ export default function Projects() {
 
   const filteredProjects =
     selectedCategory === "All"
-      ? projects
-      : projects.filter((p) => p.categoryKey === selectedCategory);
+      ? processedProjects
+      : processedProjects.filter((p) => p.categoryKey === selectedCategory);
 
   return (
     <div className="pt-20">
-      {/* Filters */}
-      <section className="bg-blue-50 py-8">
-        <div className="flex flex-wrap gap-3 justify-center">
-          {categories.map((cat) => (
-            <motion.button
-              key={cat.key}
-              onClick={() => setSelectedCategory(cat.key)}
-              className={`px-6 py-2 rounded-full font-semibold transition ${
-                selectedCategory === cat.key
-                  ? "bg-primary text-white"
-                  : "bg-white text-primary border border-primary hover:bg-blue-50"
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {cat.label}
-            </motion.button>
-          ))}
+      {/* Loading State */}
+      {loading && (
+        <div className="text-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading projects...</p>
         </div>
-      </section>
+      )}
 
-      {/* Projects */}
-      <section className="p-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <motion.div
-              key={project.id}
-              className="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg flex flex-col"
-              whileHover={{ y: -8 }}
-            >
-              <img
-                src={project.image}
-                alt={project.name}
-                className="h-48 w-full object-cover"
-              />
+      {/* Error State */}
+      {error && (
+        <div className="text-center py-12">
+          <p className="text-red-500 mb-4">{error}</p>
+          <button 
+            onClick={() => window.location.reload()}
+            className="px-6 py-3 bg-primary text-white rounded-lg hover:opacity-90 transition-opacity"
+          >
+            Try Again
+          </button>
+        </div>
+      )}
 
-              <div className="p-4 flex flex-col flex-grow">
-                <span className="text-xs font-bold text-accent mb-2">
-                  {project.categoryLabel}
-                </span>
-
-                <h3 className="text-xl font-bold mb-2">{project.name}</h3>
-
-                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                  <MapPin size={16} />
-                  {project.location}
-                </div>
-
-                <p className="text-sm mb-4 flex-grow">{project.description}</p>
-
-                <Link 
-                  to={`/projects/${project.id}`}
-                  className="btn-primary w-full text-center"
+      {/* Projects Display */}
+      {!loading && !error && (
+        <>
+          {/* Filters */}
+          <section className="bg-blue-50 py-8">
+            <div className="flex flex-wrap gap-3 justify-center">
+              {categories.map((cat) => (
+                <motion.button
+                  key={cat.key}
+                  onClick={() => setSelectedCategory(cat.key)}
+                  className={`px-6 py-2 rounded-full font-semibold transition ${
+                    selectedCategory === cat.key
+                      ? "bg-primary text-white"
+                      : "bg-white text-primary border border-primary hover:bg-blue-50"
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  View Details
-                </Link>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+                  {cat.label}
+                </motion.button>
+              ))}
+            </div>
+          </section>
+
+          {/* Projects */}
+          <section className="p-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredProjects.map((project) => (
+                <motion.div
+                  key={project.id}
+                  className="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg flex flex-col"
+                  whileHover={{ y: -8 }}
+                >
+                  <div className="relative">
+                    <img
+                      src={project.image}
+                      alt={project.name}
+                      className="h-48 w-full object-cover"
+                    />
+                    {/* Status Badge */}
+                    {project.status && (
+                      <span className={`absolute top-2 left-2 px-2 py-1 text-xs font-bold rounded-full ${
+                        project.status === 'live' 
+                          ? 'bg-green-500 text-white' 
+                          : project.status === 'draft'
+                          ? 'bg-yellow-500 text-white'
+                          : 'bg-blue-500 text-white'
+                      }`}>
+                        {project.status.toUpperCase()}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="p-4 flex flex-col flex-grow">
+                    <span className="text-xs font-bold text-accent mb-2">
+                      {project.categoryLabel}
+                    </span>
+
+                    <h3 className="text-xl font-bold mb-2">{project.name}</h3>
+
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                      <MapPin size={16} />
+                      {project.location}
+                    </div>
+                      
+                    <p className="text-sm mb-4 flex-grow">{project.description}</p>
+
+                    <Link 
+                      to={`/projects/${project.id}`}
+                      className="btn-primary w-full text-center"
+                    >
+                      View Details
+                    </Link>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </section>
+        </>
+      )}
     </div>
   );
 }

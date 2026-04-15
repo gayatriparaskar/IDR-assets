@@ -11,6 +11,7 @@ interface ImageSliderProps {
   className?: string;
   borderRadius?: "none" | "lg" | "xl";
   showControls?: boolean;
+  status?: string; // Add status prop
 }
 
 export default function ImageSlider({
@@ -22,6 +23,7 @@ export default function ImageSlider({
   className = "h-96 lg:h-full min-h-96",
   borderRadius = "xl",
   showControls = true,
+  status, // Add status parameter
 }: ImageSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -105,6 +107,21 @@ export default function ImageSlider({
               alt={`Slide ${currentIndex + 1}`}
               className="w-full h-full object-cover"
             />
+            
+            {/* Status Badge */}
+            {status && (
+              <div className="absolute top-4 left-4 z-10">
+                <span className={`px-3 py-1 text-xs font-bold rounded-full ${
+                  status === 'live' 
+                    ? 'bg-green-500 text-white' 
+                    : status === 'draft'
+                    ? 'bg-yellow-500 text-white'
+                    : 'bg-blue-500 text-white'
+                }`}>
+                  {status.toUpperCase()}
+                </span>
+              </div>
+            )}
           </motion.div>
 
           {/* Gradient Overlay */}

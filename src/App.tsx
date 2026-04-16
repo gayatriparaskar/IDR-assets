@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import WhatsAppButton from "./components/WhatsAppButton";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
@@ -28,6 +29,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => (
     <NavBar />
     <main className="flex-grow">{children}</main>
     <Footer />
+    <WhatsAppButton />
   </div>
 );
 

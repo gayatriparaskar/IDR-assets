@@ -28,6 +28,7 @@ interface Property {
   name: string;
   description: string;
   status: string;
+  category: string;
   image?: string;
   images?: Array<{
     url: string;
@@ -237,7 +238,7 @@ export default function ProjectsShowcaseSection({
                   images={displayResidentialImages}
                   autoplay={true}
                   autoplayDelay={5000}
-                  title="Residential Properties"
+                  title={properties[0]?.category || "investment Property"}
                   subtitle={properties[0]?.description || "Modern living spaces with premium amenities"}
                   status={properties[0]?.status}
                 />
@@ -346,7 +347,7 @@ export default function ProjectsShowcaseSection({
                   images={displayInvestmentImages}
                   autoplay={true}
                   autoplayDelay={5000}
-                  title="Investment Properties"
+                  title={properties[1]?.category || properties[0]?.category || "Investment Property"}
                   subtitle={properties[1]?.description || properties[0]?.description || "Prime locations with high growth potential"}
                   status={(properties[1] || properties[0])?.status}
                 />

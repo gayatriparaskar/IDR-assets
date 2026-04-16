@@ -210,10 +210,7 @@ export default function Contact() {
                       <div>
                         <p className="font-semibold text-foreground mb-1">Office Address</p>
                         <p className="text-sm text-muted-foreground">
-                          1st Floor, Shop No. 2, Bhagat Plaza
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          Pandumal Chauraha, Burhanpur 450331
+                          In front of navgrah Mandir Joshi Wada Burhanpur (M.P.)
                         </p>
                       </div>
                     </div>
@@ -225,10 +222,10 @@ export default function Contact() {
                       <div>
                         <p className="font-semibold text-foreground mb-1">Email</p>
                         <a
-                          href="mailto:aadharshilaRealtors22@gmail.com"
+                          href="mailto:aadharassetm@gmail.com"
                           className="text-sm text-primary hover:underline"
                         >
-                          aadharshilaRealtors22@gmail.com
+                          aadharassetm@gmail.com
                         </a>
                       </div>
                     </div>
@@ -240,17 +237,12 @@ export default function Contact() {
                       <div>
                         <p className="font-semibold text-foreground mb-1">Phone</p>
                         <a
-                          href="tel:+917000654305"
+                          href="tel:+917000275998"
                           className="text-sm text-primary hover:underline block"
                         >
-                          +91 7000654305
+                         +917000275998
                         </a>
-                        <a
-                          href="tel:+919893812025"
-                          className="text-sm text-primary hover:underline"
-                        >
-                          +91 9893812025
-                        </a>
+                        
                       </div>
                     </div>
                   </div>

@@ -78,7 +78,7 @@ export default function Home() {
         investmentImages={investmentImages} 
       />
       <PartnersSection />
-      <BlogSection />
+      {/* <BlogSection /> */}
       <CTASection />
       <AssetManagement />
     </div>

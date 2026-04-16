@@ -94,11 +94,7 @@ export default function ProjectDetail() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-    
-
-      {/* Main Content */}
-      <div className="container mx-auto px-4 pb-16">
-          {/* Back Button */}
+      {/* Back Button */}
       <div className="container mx-auto px-4 py-8">
         <Link 
           to="/projects" 
@@ -108,6 +104,9 @@ export default function ProjectDetail() {
           Back to Projects
         </Link>
       </div>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-4 pb-16">
         {/* Hero Section */}
         <div className="bg-white rounded-xl shadow-md overflow-hidden mb-12">
           <div className="h-96 overflow-hidden">
@@ -119,7 +118,29 @@ export default function ProjectDetail() {
           </div>
           
           <div className="p-8">
-            
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+              <div>
+                <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-sm font-semibold rounded-full mb-4">
+                  {property?.status === 'published' ? 'Ready to Move' : property?.status === 'draft' ? 'Draft' : 'Coming Soon'}
+                </span>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">{property?.name}</h1>
+                <div className="flex items-center text-gray-600">
+                  <MapPin size={18} className="mr-2" />
+                  {property?.address?.city}, {property?.address?.state}
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <button className="btn-primary px-8 py-3 text-lg">
+                  Schedule Site Visit
+                </button>
+                <Link 
+                  to="/projects" 
+                  className="px-8 py-3 text-lg bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors duration-300"
+                >
+                  Back to Projects
+                </Link>
+              </div>
+            </div>
 
             <div className="prose max-w-none">
               <h3 className="text-xl font-semibold mb-4">Project Overview</h3>

@@ -16,10 +16,10 @@ interface PartnerSliderProps {
 }
 
 const defaultPartners: Partner[] = [
-  { id: 1, name: "Aadhar Shila ", icon: "🏢", type: "Real Estate" },
-  { id: 2, name: "IDR24x7", icon: "🏗️", type: "Digital Real Estate" },
-  { id: 3, name: "Akrypt IT Solutions PVT LTD", icon: "🚀", type: "Technology" },
-  { id: 4, name: "FinanceWave", icon: "📊", type: "Finance" },
+  { id: 1, name: "Aadhar Shila Property", icon: "🏢", type: "Real Estate Management"  },
+  { id: 2, name: "IDR24x7 PVT. LTD.", icon: "🏗️", type: "Digital Real Estate" },
+  { id: 3, name: "Akrypt IT Solutions PVT. LTD.", icon: "🚀", type: "Technology" },
+  { id: 4, name: "KSR Property Management", icon: "📊", type: "Property Management" },
   { id: 5, name: "Infrastructure Pro", icon: "🔧", type: "Infrastructure" },
   { id: 6, name: "NextGen Solutions", icon: "🌟", type: "Innovation" },
   { id: 7, name: "Global Ventures", icon: "💼", type: "Enterprise" },

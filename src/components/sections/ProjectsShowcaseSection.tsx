@@ -6,15 +6,19 @@ import { API_URLS, API_BASE_URL } from "../../config/api";
 // Helper function to get proper image URL
 const getImageUrl = (imagePath: string | null | undefined): string => {
   if (!imagePath) {
+    console.log('No image path provided');
     return '';
   }
   
   if (imagePath.startsWith('http')) {
+    console.log('Image path is already a full URL:', imagePath);
     return imagePath;
   }
   
   const fullUrl = `${API_BASE_URL}${imagePath}`;
- 
+  console.log('API_BASE_URL:', API_BASE_URL);
+  console.log('imagePath:', imagePath);
+  console.log('Constructed image URL:', fullUrl);
   
   return fullUrl;
 };
@@ -70,7 +74,8 @@ export default function ProjectsShowcaseSection({
           throw new Error('Failed to fetch properties');
         }
         const data = await response.json();
-             
+        console.log('Properties data:', data);
+        
         // Handle the actual API response structure
         let propertiesData = [];
         if (data.success && data.properties) {
@@ -80,8 +85,7 @@ export default function ProjectsShowcaseSection({
         }
         
         setProperties(propertiesData);
-      } 
-      catch (err) {
+      } catch (err) {
         console.error('Error fetching properties:', err);
         setError('Failed to load properties');
       } finally {
@@ -97,7 +101,6 @@ export default function ProjectsShowcaseSection({
   const [displayInvestmentImages, setDisplayInvestmentImages] = useState<string[]>([]);
   const [displayResidentialFeatures, setDisplayResidentialFeatures] = useState<string[]>([]);
   const [displayInvestmentSpecifications, setDisplayInvestmentSpecifications] = useState<string[]>([]);
-  const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
 
   // Process properties data from API
   useEffect(() => {
@@ -107,21 +110,23 @@ export default function ProjectsShowcaseSection({
     const comingSoonProperties = properties.filter(property => 
       property.status === 'coming soon'
     );
-    setFilteredProperties(comingSoonProperties);
-  
+      setProperties(comingSoonProperties);
+    console.log('Coming soon properties:', comingSoonProperties);
+    console.log('All properties:', properties);
 
     // Extract images from properties (handle both single image and multiple images)
     const extractImages = (property: Property): string[] => {
       const images: string[] = [];
       
-     
+      console.log('Extracting images from property:', property.name);
+      console.log('Single image:', property.image);
+      console.log('Multiple images:', property.images);
       
       // Add single image if exists
       if (property.image) {
         const fullImageUrl = getImageUrl(property.image);
-        console.log(fullImageUrl,"fullImageurl")
         images.push(fullImageUrl);
-       
+        console.log('Added single image:', fullImageUrl);
       }
       
       // Add multiple images if exist
@@ -130,12 +135,12 @@ export default function ProjectsShowcaseSection({
           if (img.url) {
             const fullImageUrl = getImageUrl(img.url);
             images.push(fullImageUrl);
-           
+            console.log('Added multiple image:', fullImageUrl);
           }
         });
       }
       
-     
+      console.log('Final images array:', images);
       return images;
     };
 
@@ -147,13 +152,13 @@ export default function ProjectsShowcaseSection({
     };
 
     // Process properties for display
-    if (filteredProperties.length > 0) {
+    if (comingSoonProperties.length > 0) {
       // Get images for first property (residential)
-      const residentialImages = extractImages(filteredProperties[0]);
+      const residentialImages = extractImages(comingSoonProperties[0]);
       setDisplayResidentialImages(residentialImages);
 
       // Get features for first property
-      const residentialFeatures = extractFeatures(filteredProperties[0]);
+      const residentialFeatures = extractFeatures(comingSoonProperties[0]);
       setDisplayResidentialFeatures(residentialFeatures.length > 0 ? residentialFeatures : [
         "World-class amenities and facilities",
         "Green spaces and landscaping", 
@@ -162,11 +167,11 @@ export default function ProjectsShowcaseSection({
       ]);
 
       // Process second property if available (investment)
-      if (filteredProperties.length > 1) {
-        const investmentImages = extractImages(filteredProperties[1]);
+      if (comingSoonProperties.length > 1) {
+        const investmentImages = extractImages(comingSoonProperties[1]);
         setDisplayInvestmentImages(investmentImages);
 
-        const investmentFeatures = extractFeatures(filteredProperties[1]);
+        const investmentFeatures = extractFeatures(comingSoonProperties[1]);
         setDisplayInvestmentSpecifications(investmentFeatures.length > 0 ? investmentFeatures : [
           "500 - 2000 sq.ft. available",
           "Clear title and legal documentation",
@@ -184,7 +189,7 @@ export default function ProjectsShowcaseSection({
         ]);
       }
     } else {
-     
+      console.log('No coming soon properties found');
       // Set empty arrays if no coming soon properties
       setDisplayResidentialImages([]);
       setDisplayResidentialFeatures([]);

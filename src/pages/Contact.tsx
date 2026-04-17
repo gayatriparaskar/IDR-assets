@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+import { API_URLS } from "../config/api";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    service: "",
+    subject: "",
     message: "",
+    queryForm:"Aadhar Asset"
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,8 +28,22 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission (in production, this would call your backend API)
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch(API_URLS.QUERIES, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          queryFrom: "Aadhar Asset",
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to submit query");
+      }
 
       // Success message
       setSubmitMessage("Thank you! We'll contact you soon.");
@@ -35,7 +51,7 @@ export default function Contact() {
         name: "",
         email: "",
         phone: "",
-        service: "",
+        subject: "",
         message: "",
       });
 
@@ -43,8 +59,9 @@ export default function Contact() {
       setTimeout(() => {
         setSubmitMessage("");
       }, 5000);
-    } catch (error) {
-      setSubmitMessage("An error occurred. Please try again.");
+    } catch (error: any) {
+      console.error("Contact form error:", error);
+      setSubmitMessage(error.message || "An error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -149,9 +166,9 @@ export default function Contact() {
                         Service Interest *
                       </label>
                       <select
-                        id="service"
-                        name="service"
-                        value={formData.service}
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"

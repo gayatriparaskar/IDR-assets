@@ -1,6 +1,6 @@
 // API Configuration
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://idr-backend-1.onrender.com';
-// export const API_BASE_URL = 'http://localhost:5000';
+// export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://idr-backend-1.onrender.com';
+export const API_BASE_URL = 'http://localhost:5000';
 
 // API Endpoints
 export const API_ENDPOINTS = {
@@ -17,6 +17,7 @@ export const API_ENDPOINTS = {
   CONTACT: '/api/contact',
   PROJECTS: '/api/projects',
   SERVICES: '/api/services',
+  QUERIES: '/api/queries',
 } as const;
 
 // Helper function to construct full URLs
@@ -32,4 +33,5 @@ export const API_URLS = {
   CONTACT: createApiUrl(API_ENDPOINTS.CONTACT),
   PROJECTS: createApiUrl(API_ENDPOINTS.PROJECTS),
   SERVICES: createApiUrl(API_ENDPOINTS.SERVICES),
+  QUERIES: createApiUrl(API_ENDPOINTS.QUERIES),
 } as const;

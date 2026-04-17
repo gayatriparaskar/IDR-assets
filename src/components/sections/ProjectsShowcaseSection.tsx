@@ -119,6 +119,7 @@ export default function ProjectsShowcaseSection({
       // Add single image if exists
       if (property.image) {
         const fullImageUrl = getImageUrl(property.image);
+        console.log(fullImageUrl,"fullImageurl")
         images.push(fullImageUrl);
        
       }
